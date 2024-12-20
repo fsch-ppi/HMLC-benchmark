@@ -1,0 +1,40 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: Workflow
+metadata:
+  name: pod-failure
+spec:
+  entry: parententry
+  templates:
+  - name: parententry
+    templateType: Parallel
+    deadline: 360s
+    children:
+    - podfailure-1
+    - network-delay-1
+  - name: podfailure-1
+    templateType: Schedule
+    deadline: 30s
+    schedule:
+      concurrencyPolicy: Allow
+      podChaos:
+        action: pod-failure
+        mode: one
+        selector:
+          labelSelectors:
+            "app": "heuristics-miner-flink"
+          namespaces:
+          - kafka
+      schedule: '*/2 * * * *'
+  - name: network-delay-1
+    templateType: NetworkChaos
+    deadline: 360s
+    networkChaos:
+      action: delay
+      delay:
+        correlation: '0'
+        jitter: '0'
+        latency: 0ms
+      mode: all
+      selector:
+        namespaces:
+        - kafka

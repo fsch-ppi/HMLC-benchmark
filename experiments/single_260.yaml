@@ -1,0 +1,18 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: Schedule
+metadata:
+  name: pod-failure-260ms
+spec:
+  schedule: '*/2 * * * *'
+  concurrencyPolicy: Forbid
+  type: PodChaos
+  historyLimit: 5
+  podChaos:
+    action: pod-failure
+    mode: one
+    duration: '30s'
+    selector:
+      labelSelectors:
+        app: heuristics-miner-flink
+      namespaces:
+      - kafka
