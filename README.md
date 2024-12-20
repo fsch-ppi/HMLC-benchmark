@@ -100,6 +100,11 @@ kubectl port-forward svc/kafka-ui 8080:80 -n kafka
 kubectl port-forward service/grafana-nodeport-service 9091:80 -n monitoring
 ```
 
+Finally, install the python requirments
+```shell
+pip install -r requirements.txt
+```
+
 Now you are ready to go!
 
 #### 🔍 Defining Chaos Tests
