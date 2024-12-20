@@ -116,6 +116,8 @@ Examples can be found [here](/experiments/unused_jsonnet_templates/_explanation_
 
 When you run the main [CLI application](/chaos_wizard_cli.py), Jsonnet templates will be automatically converted to valid yaml. 
 
+
+The [helpers](/experiments/jsonnet_templates/helpers/) folder holds all basic definitions for the currently supported tests. As of now this are only NetworkChaos, PodChaos and TimeChaos [refer to](https://chaos-mesh.org/docs/simulate-pod-chaos-on-kubernetes/)
 #### 🧪 Running single tests
 Before running your first test, take a look into [config.env](/config.env). This holds test parameters, such as the interval in which the logging service fetches data and how long you want runs to be. Make sure this somewhat alligns with your Chaos Test definitions.
 
